@@ -6,7 +6,7 @@ namespace eShop.Core.Entities
 {
     public class Order
     {
-        public Guid ID { get; set; }
+        public Guid? OrderID { get; set; }
         public DateTime OrderDate { get; set; }
         public int Status { get; set; }
     }

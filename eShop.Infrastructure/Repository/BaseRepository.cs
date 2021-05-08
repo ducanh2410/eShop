@@ -5,6 +5,7 @@ using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace eShop.Infrastructure.Repository
@@ -18,7 +19,7 @@ namespace eShop.Infrastructure.Repository
         public BaseRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
-            dbConnection = new MySqlConnection(this.configuration.GetConnectionString("Connection"));
+            dbConnection = new SqlConnection(this.configuration.GetConnectionString("Connection"));
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace eShop.Infrastructure.Repository
         public T GetById(Guid TentityId)
         {
             DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("CustomerId", TentityId);
+            parameters.Add("ID", TentityId);
             var customer = dbConnection.QueryFirstOrDefault<T>($"Proc_Get{tableName}ById", param: parameters, commandType: CommandType.StoredProcedure);
             return customer;
         }
@@ -74,7 +75,7 @@ namespace eShop.Infrastructure.Repository
         public int Delete(Guid TentityId)
         {
             DynamicParameters parameters = new DynamicParameters();
-            parameters.Add($"{tableName}Id", TentityId);
+            parameters.Add($"ID", TentityId);
             var rowAffects = dbConnection.Execute($"Proc_Delete{tableName}", parameters, commandType: CommandType.StoredProcedure);
             return rowAffects;
         }

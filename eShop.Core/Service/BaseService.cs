@@ -17,27 +17,32 @@ namespace eShop.Core.Service
 
         public int Delete(Guid TentityId)
         {
-            throw new NotImplementedException();
+            var rowAffect = _baseRepository.Delete(TentityId);
+            return rowAffect;
         }
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            var customers = _baseRepository.GetAll();
+            return customers;
         }
 
         public T GetById(Guid TentityId)
         {
-            throw new NotImplementedException();
+            var customer = _baseRepository.GetById(TentityId);
+            return customer;
         }
 
         public int Insert(T Tentity)
         {
-            throw new NotImplementedException();
+            var rowAffect = _baseRepository.Insert(Tentity);
+            return rowAffect;
         }
 
         public int Update(T Tentity)
         {
-            throw new NotImplementedException();
+            var rowAffect = _baseRepository.Update(Tentity);
+            return rowAffect;
         }
     }
 }
